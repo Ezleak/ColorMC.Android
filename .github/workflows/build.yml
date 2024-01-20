@@ -73,6 +73,19 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
+    - name: set up JDK 17
+      uses: actions/setup-java@main
+      with:
+        distribution: 'dragonwell'
+        java-version: '17'
+    - name: Build
+      run: dotnet build --no-restore
+    - name: 上传构建文件
+      uses: actions/upload-artifact@v4
+      with:
+        name: colormc
+        path: build_out/
+
     # Add  MSBuild to the PATH: https://githubfast.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
